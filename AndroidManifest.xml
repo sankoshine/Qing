@@ -5,6 +5,12 @@
     android:versionName="1.0" >
 
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+        <uses-permission android:name="android.permission.SEND_SMS"/>  
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+ 
     
     <uses-sdk
         android:minSdkVersion="8"
@@ -14,7 +20,7 @@
         android:allowBackup="true"
         android:icon="@drawable/x2"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" 
@@ -28,6 +34,15 @@
         <activity
             android:name=".EditInfo"
             android:label="@string/app_name" ></activity>
+        <activity
+            android:name=".Send"
+            android:label="@string/app_name" ></activity>
+        <receiver android:name=".SMSRecv" >  
+        <intent-filter android:priority="999"> 
+            <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+        </intent-filter>       
+        </receiver> 
+        
     </application>
 
 </manifest>

@@ -5,20 +5,24 @@
 
     <item
         android:id="@+id/add"
-        android:orderInCategory="100"
+        android:orderInCategory="102"
         android:title="新增联系人"
         app:showAsAction="never"/>
     
     <item
         android:id="@+id/init"
-        android:orderInCategory="101"
+        android:orderInCategory="110"
         android:title="重置"
         />
     
     <item
         android:id="@+id/about"
-        android:orderInCategory="102"
+        android:orderInCategory="120"
         android:title="关于"
         />
-
+    <item
+        android:id="@+id/sendsms"
+        android:orderInCategory="100"
+        android:title="发送短信"
+        />
 </menu>

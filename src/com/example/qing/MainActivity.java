@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -42,7 +43,9 @@ public class MainActivity extends ActionBarActivity {
         fi = (Button)findViewById(R.id.find);
         
         db = openOrCreateDatabase("test.db", Context.MODE_PRIVATE, null); 
-        db.execSQL("CREATE TABLE IF NOT EXISTS person (_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tel VARCHAR)");        
+        db.execSQL("CREATE TABLE IF NOT EXISTS person (_id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tel VARCHAR)");
+        
+      
     }
     
     @Override
@@ -66,7 +69,7 @@ public class MainActivity extends ActionBarActivity {
         li.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {        
+					long arg3) {
 				c.moveToPosition(arg2);
 				String tel = c.getString(c.getColumnIndexOrThrow("tel"));
 				Intent intent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + tel));             
@@ -110,6 +113,10 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if(id==R.id.sendsms){
+        	Intent i = new Intent(this,Send.class);
+        	startActivity(i);
+        }
         if (id == R.id.add) {
         	Intent intent = new Intent(this, EditInfo.class);
         	startActivityForResult(intent, 999);
@@ -119,7 +126,7 @@ public class MainActivity extends ActionBarActivity {
         	new AlertDialog
         	.Builder(this)
         	.setTitle("ABOUT")
-        	.setMessage("SanKo\n2015-4-9")
+        	.setMessage("SanKo\n2015-4-9\nupdate:\nsms on 5-1")
         	.setPositiveButton("OK", null)
         	.show();
         }
@@ -131,10 +138,7 @@ public class MainActivity extends ActionBarActivity {
         	db.execSQL("INSERT INTO person VALUES (NULL, ?, ?)", new Object[]{"Daniel", "15757827999"});
         	db.execSQL("INSERT INTO person VALUES (NULL, ?, ?)", new Object[]{"尼克", "057488889999"});  
         	disp();
-        	new AlertDialog
-        	.Builder(this)
-        	.setMessage("已重置")
-        	.show();
+        	Toast.makeText(getApplicationContext(), "已重置", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -201,3 +205,4 @@ public class MainActivity extends ActionBarActivity {
     }
     
 }
+
